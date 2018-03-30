@@ -6,7 +6,7 @@ matrix:
 pipeline:
   build:
     image: joemama:test3
-    image: golang:${GO_VERSION}
+   # image: golang:${GO_VERSION}
     commands:
       - echo $GOPATH
       - ls -lah /go/
