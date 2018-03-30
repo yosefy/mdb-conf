@@ -1,4 +1,4 @@
-# MDB generated config template
+## MDB generated config template
 [server]
 bind-address=":8080"
 mode="debug"  # GIN mode. Either debug, release or test
