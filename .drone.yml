@@ -43,8 +43,6 @@ pipeline:
       - sha512
       - adler32
       - crc32
-    when:
-      event: tag
 
 services:
   postgres:
