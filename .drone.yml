@@ -31,7 +31,7 @@ pipeline:
       - rambler -c migrations/rambler.json apply -a
       - export GOPATH=$GOPATH:$GOPATH/src/github.com/Bnei-Baruch/mdb/vendor
       - make build
-      - cp $GOPATH/src/github.com/Bnei-Baruch/mdb/mdb /drone/
+      - cp /go/src/github.com/Bnei-Baruch/mdb/mdb /drone/
   github_release:
     image: plugins/github-release
     secrets: [ github_token ]
