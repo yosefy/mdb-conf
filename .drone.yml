@@ -34,7 +34,7 @@ pipeline:
       - export GOPATH=$GOPATH:$GOPATH/src/github.com/Bnei-Baruch/mdb/vendor
       - make build
       - cp /go/src/github.com/Bnei-Baruch/mdb/mdb /drone/
-      - sleep 5
+      - sleep 10
   github_release:
     image: plugins/github-release
     secrets: [ github_token ]
