@@ -31,18 +31,12 @@ pipeline:
       - rambler -c migrations/rambler.json apply -a
       - export GOPATH=$GOPATH:$GOPATH/src/github.com/Bnei-Baruch/mdb/vendor
       - make build
+      - ls -lah $GOPATH/bin/github.com/Bnei-Baruch/mdb/mdb
   github_release:
     image: plugins/github-release
     secrets: [ github_token ]
     files:
       - $GOPATH/src/github.com/Bnei-Baruch/mdb/mdb
-    checksum:
-      - md5
-      - sha1
-      - sha256
-      - sha512
-      - adler32
-      - crc32
 
 services:
   postgres:
