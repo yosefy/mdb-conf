@@ -22,12 +22,11 @@ pipeline:
   
       - mv /drone/src/github.com/yosefy $GOPATH/src/github.com/
       - cd $GOPATH
-      - git clone https://bitbucket.org/bneib/mdb-config.git
       - git clone https://github.com/Bnei-Baruch/mdb.git $GOPATH/src/github.com/Bnei-Baruch/mdb
       - cd $GOPATH/src/github.com/Bnei-Baruch/mdb
-      - cp $GOPATH/src/github.com/yosefy/mdb/config.toml $GOPATH/src/github.com/Bnei-Baruch/mdb/config.toml
-      - cp $GOPATH/src/github.com/yosefy/mdb/sqlboiler.toml $GOPATH/src/github.com/Bnei-Baruch/mdb/sqlboiler.toml
-      - cp $GOPATH/src/github.com/yosefy/mdb/migrations/rambler.json $GOPATH/src/github.com/Bnei-Baruch/mdb/migrations/rambler.json
+      - cp $GOPATH/src/github.com/yosefy/mdb-conf/config.toml $GOPATH/src/github.com/Bnei-Baruch/mdb/config.toml
+      - cp $GOPATH/src/github.com/yosefy/mdb-conf/sqlboiler.toml $GOPATH/src/github.com/Bnei-Baruch/mdb/sqlboiler.toml
+      - cp $GOPATH/src/github.com/yosefy/mdb-conf/migrations/rambler.json $GOPATH/src/github.com/Bnei-Baruch/mdb/migrations/rambler.json
       - cd $GOPATH/src/github.com/Bnei-Baruch/mdb && go-bindata data/... && sed -i 's/package main/package bindata/' bindata.go && mv bindata.go ./bindata
       - rambler -c migrations/rambler.json apply -a
       - export GOPATH=$GOPATH:$GOPATH/src/github.com/Bnei-Baruch/mdb/vendor
