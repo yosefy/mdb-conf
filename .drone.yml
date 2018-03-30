@@ -1,0 +1,42 @@
+matrix:
+  GO_VERSION:
+    - 1.9
+    - 1.10
+
+pipeline:
+  build:
+    image: golang:${GO_VERSION}
+    commands:
+      - echo $GOPATH
+      - ls -lah /go/
+      - ls -lah /go/bin/
+      - export PATH=$PATH:$GOPATH/bin
+      
+
+      - apt-get update && apt-get install -y postgresql-client
+      - go get github.com/jteeuwen/go-bindata/...
+      - go get github.com/stretchr/testify/suite/...
+      - go get github.com/elwinar/rambler
+      - go get gopkg.in/gin-gonic/gin.v1
+      - go get github.com/lib/pq
+  
+      - mv /drone/src/github.com/yosefy $GOPATH/src/github.com/
+      - cd $GOPATH
+      - git clone https://bitbucket.org/bneib/mdb-config.git
+      - git clone https://github.com/Bnei-Baruch/mdb.git $GOPATH/src/github.com/Bnei-Baruch/mdb
+      - cd $GOPATH/src/github.com/Bnei-Baruch/mdb
+      - cp $GOPATH/src/github.com/yosefy/mdb/config.toml $GOPATH/src/github.com/Bnei-Baruch/mdb/config.toml
+      - cp $GOPATH/src/github.com/yosefy/mdb/sqlboiler.toml $GOPATH/src/github.com/Bnei-Baruch/mdb/sqlboiler.toml
+      - cp $GOPATH/src/github.com/yosefy/mdb/migrations/rambler.json $GOPATH/src/github.com/Bnei-Baruch/mdb/migrations/rambler.json
+      - cd $GOPATH/src/github.com/Bnei-Baruch/mdb && go-bindata data/... && sed -i 's/package main/package bindata/' bindata.go && mv bindata.go ./bindata
+      - rambler -c migrations/rambler.json apply -a
+      - export GOPATH=$GOPATH:$GOPATH/src/github.com/Bnei-Baruch/mdb/vendor
+      - make build
+
+services:
+  postgres:
+    image: postgres:9
+    environment:
+      - POSTGRES_DB=mdb
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=test123
