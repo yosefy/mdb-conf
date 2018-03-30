@@ -5,6 +5,7 @@ matrix:
 
 pipeline:
   build:
+    image: joemama:test3
     image: golang:${GO_VERSION}
     commands:
       - echo $GOPATH
@@ -13,12 +14,12 @@ pipeline:
       - export PATH=$PATH:$GOPATH/bin
       
 
-      - apt-get update && apt-get install -y postgresql-client
-      - go get github.com/jteeuwen/go-bindata/...
-      - go get github.com/stretchr/testify/suite/...
-      - go get github.com/elwinar/rambler
-      - go get gopkg.in/gin-gonic/gin.v1
-      - go get github.com/lib/pq
+    #  - apt-get update && apt-get install -y postgresql-client
+    #  - go get github.com/jteeuwen/go-bindata/...
+    #  - go get github.com/stretchr/testify/suite/...
+    #  - go get github.com/elwinar/rambler
+     # - go get gopkg.in/gin-gonic/gin.v1
+    #  - go get github.com/lib/pq
   
       - mv /drone/src/github.com/yosefy $GOPATH/src/github.com/
       - cd $GOPATH
