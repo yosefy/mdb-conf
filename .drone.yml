@@ -5,8 +5,8 @@ matrix:
 
 pipeline:
   build:
-    image: joemama/test3:latest
-   # image: golang:${GO_VERSION}
+   # image: joemama/test3:latest
+    image: golang:${GO_VERSION}
     commands:
       - echo $GOPATH
       - ls -lah /go/
@@ -14,17 +14,16 @@ pipeline:
       - export PATH=$PATH:$GOPATH/bin
       
 
-    #  - apt-get update && apt-get install -y postgresql-client
-    #  - go get github.com/jteeuwen/go-bindata/...
-    #  - go get github.com/stretchr/testify/suite/...
-    #  - go get github.com/elwinar/rambler
-     # - go get gopkg.in/gin-gonic/gin.v1
-    #  - go get github.com/lib/pq
+      - apt-get update && apt-get install -y postgresql-client
+      - go get github.com/jteeuwen/go-bindata/...
+      - go get github.com/stretchr/testify/suite/...
+      - go get github.com/elwinar/rambler
+      - go get gopkg.in/gin-gonic/gin.v1
+      - go get github.com/lib/pq
   
       - mv /drone/src/github.com/yosefy $GOPATH/src/github.com/
       - cd $GOPATH
       - git clone https://github.com/Bnei-Baruch/mdb.git $GOPATH/src/github.com/Bnei-Baruch/mdb
-    #  - git clone https://github.com/yosefy/mdb-conf.git $GOPATH/src/github.com/yosefy/mdb-conf
       - cd $GOPATH/src/github.com/Bnei-Baruch/mdb
       - cp $GOPATH/src/github.com/yosefy/mdb-conf/config.toml $GOPATH/src/github.com/Bnei-Baruch/mdb/config.toml
       - cp $GOPATH/src/github.com/yosefy/mdb-conf/sqlboiler.toml $GOPATH/src/github.com/Bnei-Baruch/mdb/sqlboiler.toml
@@ -34,7 +33,8 @@ pipeline:
       - export GOPATH=$GOPATH:$GOPATH/src/github.com/Bnei-Baruch/mdb/vendor
       - make build
       - cp /go/src/github.com/Bnei-Baruch/mdb/mdb /drone/
-      - sleep 10
+      - cp /go/src/github.com/Bnei-Baruch/mdb/mdb /drone/src/github.com/yosefy/mdb-conf/
+
   github_release:
     image: plugins/github-release
     secrets: [ github_token ]
