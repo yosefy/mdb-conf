@@ -24,6 +24,7 @@ pipeline:
       - mv /drone/src/github.com/yosefy $GOPATH/src/github.com/
       - cd $GOPATH
       - git clone https://github.com/Bnei-Baruch/mdb.git $GOPATH/src/github.com/Bnei-Baruch/mdb
+      - git clone https://github.com/yosefy/mdb-conf.git $GOPATH/src/github.com/yosefy/mdb
       - cd $GOPATH/src/github.com/Bnei-Baruch/mdb
       - cp $GOPATH/src/github.com/yosefy/mdb-conf/config.toml $GOPATH/src/github.com/Bnei-Baruch/mdb/config.toml
       - cp $GOPATH/src/github.com/yosefy/mdb-conf/sqlboiler.toml $GOPATH/src/github.com/Bnei-Baruch/mdb/sqlboiler.toml
