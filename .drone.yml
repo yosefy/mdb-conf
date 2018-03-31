@@ -41,6 +41,7 @@ pipeline:
     secrets: [ github_token ]
     files:
       - mdbxxxxxxxxxxxx
+    file_exists: fail
 
 services:
   postgres:
