@@ -44,7 +44,6 @@ pipeline:
     when:
       event: tag
 
-pipeline:
   scp:
     image: appleboy/drone-scp
     host:
