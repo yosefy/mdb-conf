@@ -47,7 +47,7 @@ pipeline:
   scp:
     image: appleboy/drone-scp
     host: 146.185.60.36
-    user: archive
+    username: archive
     port: 8116
     secrets: [ deploy_key ]
     target: /tmp
