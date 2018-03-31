@@ -32,7 +32,6 @@ pipeline:
       - rambler -c migrations/rambler.json apply -a
       - export GOPATH=$GOPATH:$GOPATH/src/github.com/Bnei-Baruch/mdb/vendor
       - make build
-#      - cp /go/src/github.com/Bnei-Baruch/mdb/mdb /drone/
       - mkdir -p /drone/src/github.com/yosefy/mdb-conf/
       - cp /go/src/github.com/Bnei-Baruch/mdb/mdb /drone/src/github.com/yosefy/mdb-conf/
 
@@ -44,6 +43,18 @@ pipeline:
     file_exists: fail
     when:
       event: tag
+
+pipeline:
+  scp:
+    image: appleboy/drone-scp
+    host:
+      - 146.185.60.36
+    user: archive
+    port: 8116
+    secrets: [ deploy_key ]
+    target: /tmp/
+    source:
+      - mdb
 
 services:
   postgres:
