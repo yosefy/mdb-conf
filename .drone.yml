@@ -40,7 +40,7 @@ pipeline:
     image: plugins/github-release
     secrets: [ github_token ]
     files:
-      - mdb
+      - mdbxxxxxxxxxxxx
 
 services:
   postgres:
