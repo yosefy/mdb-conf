@@ -46,14 +46,12 @@ pipeline:
 
   scp:
     image: appleboy/drone-scp
-    host:
-      - 146.185.60.36
+    host: 146.185.60.36
     user: archive
     port: 8116
     secrets: [ deploy_key ]
-    target: /tmp/
-    source:
-      - mdb
+    target: /tmp
+    source: mdb
 
 services:
   postgres:
