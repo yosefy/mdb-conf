@@ -32,9 +32,9 @@ pipeline:
       - rambler -c migrations/rambler.json apply -a
       - export GOPATH=$GOPATH:$GOPATH/src/github.com/Bnei-Baruch/mdb/vendor
       - make build
-      - cp /go/src/github.com/Bnei-Baruch/mdb/mdb /drone/
-#      - mkdir -p /drone/src/github.com/yosefy/mdb-conf/
-#      - cp /go/src/github.com/Bnei-Baruch/mdb/mdb /drone/src/github.com/yosefy/mdb-conf/
+#      - cp /go/src/github.com/Bnei-Baruch/mdb/mdb /drone/
+      - mkdir -p /drone/src/github.com/yosefy/mdb-conf/
+      - cp /go/src/github.com/Bnei-Baruch/mdb/mdb /drone/src/github.com/yosefy/mdb-conf/
 
   github_release:
     image: plugins/github-release
