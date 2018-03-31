@@ -49,7 +49,7 @@ pipeline:
     host: 146.185.60.36
     username: archive
     port: 8116
-    secrets: [ deploy_key ]
+    secrets: [ ssh_password ]
     target: /tmp
     source: mdb
 
