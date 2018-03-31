@@ -39,9 +39,10 @@ pipeline:
   github_release:
     image: plugins/github-release
     secrets: [ github_token ]
-    files:
-      - mdbxxxxxxxxxxxx
+    files: mdb
     file_exists: fail
+    when:
+      event: tag
 
 services:
   postgres:
