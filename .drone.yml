@@ -56,6 +56,15 @@ pipeline:
       - mdb
       - migrations/*.sql
 
+#  ssh:
+#    image: appleboy/drone-ssh
+#    host: 146.185.60.36
+#    username: archive
+#    port: 8116
+#    secrets: [ ssh_key ]
+#    script:
+#      - "/sites/mdb/migrations/rambler --configuration=/sites/mdb/migrations/rambler.json apply --all"
+
 services:
   postgres:
     image: postgres:9
