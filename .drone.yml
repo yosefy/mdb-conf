@@ -32,8 +32,9 @@ pipeline:
       - rambler -c migrations/rambler.json apply -a
       - export GOPATH=$GOPATH:$GOPATH/src/github.com/Bnei-Baruch/mdb/vendor
       - make build
-      - mkdir -p /drone/src/github.com/yosefy/mdb-conf/
+      - mkdir -p /drone/src/github.com/yosefy/mdb-conf/migrations
       - cp /go/src/github.com/Bnei-Baruch/mdb/mdb /drone/src/github.com/yosefy/mdb-conf/
+      - cp /go/src/github.com/Bnei-Baruch/mdb/migrations/*.sql /drone/src/github.com/yosefy/mdb-conf/migrations/
 
   github_release:
     image: plugins/github-release
@@ -51,7 +52,9 @@ pipeline:
     port: 8116
     secrets: [ ssh_key ]
     target: /tmp
-    source: mdb
+    source:
+      - mdb
+      - migrations/*.sql
 
 services:
   postgres:
