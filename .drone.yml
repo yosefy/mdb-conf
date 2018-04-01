@@ -67,7 +67,7 @@ pipeline:
     username: archive
     port: 8116
     secrets: [ ssh_key ]
-    script: echo ${DRONE_TAG} >> /tmp/test_tag
+    script: echo ${DRONE_TAG}
 #    script:
 #      - "/sites/mdb/migrations/rambler --configuration=/sites/mdb/migrations/rambler.json apply --all"
 
