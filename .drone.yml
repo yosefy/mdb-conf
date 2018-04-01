@@ -35,6 +35,10 @@ pipeline:
       - mkdir -p /drone/src/github.com/yosefy/mdb-conf/migrations
       - cp /go/src/github.com/Bnei-Baruch/mdb/mdb /drone/src/github.com/yosefy/mdb-conf/
       - cp /go/src/github.com/Bnei-Baruch/mdb/migrations/*.sql /drone/src/github.com/yosefy/mdb-conf/migrations/
+      - VERSION="$(./mdb version | awk '{print $NF}')"
+      - [ -n "$version" ] || exit 1
+      - echo $VERSION
+      - echo -n "$VERSION" > .tags
 
   github_release:
     image: plugins/github-release
@@ -56,12 +60,13 @@ pipeline:
       - mdb
       - migrations/*.sql
 
-#  ssh:
-#    image: appleboy/drone-ssh
-#    host: 146.185.60.36
-#    username: archive
-#    port: 8116
-#    secrets: [ ssh_key ]
+  ssh:
+    image: appleboy/drone-ssh
+    host: 146.185.60.36
+    username: archive
+    port: 8116
+    secrets: [ ssh_key ]
+    script: echo ${DRONE_TAG} >> /tmp/test_tag
 #    script:
 #      - "/sites/mdb/migrations/rambler --configuration=/sites/mdb/migrations/rambler.json apply --all"
 
