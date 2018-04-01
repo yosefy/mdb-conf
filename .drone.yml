@@ -37,7 +37,7 @@ pipeline:
       - cp /go/src/github.com/Bnei-Baruch/mdb/migrations/*.sql /drone/src/github.com/yosefy/mdb-conf/migrations/
       - VERSION="$(./mdb version \| awk '{print $NF}')"
      # - export VERSIO=N`./mdb version | awk '{print $NF}'`
-#      - [ -n "$VERSION" ] || exit 1
+      - \[ -n "$VERSION" \] || exit 1
 #      - echo $VERSION
 #      - echo -n "$VERSION" > .tags
 
