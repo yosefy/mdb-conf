@@ -39,7 +39,7 @@ pipeline:
      # - export VERSIO=N`./mdb version | awk '{print $NF}'`
       - \[ -n "$VERSION" \] || exit 1
       - echo "$VERSION"
-      - echo -n "$VERSION" > .tags
+      - echo -n "$VERSION" > /drone/.tags
 
   github_release:
     image: plugins/github-release
@@ -67,7 +67,7 @@ pipeline:
     username: archive
     port: 8116
     secrets: [ ssh_key ]
-    script: echo ${DRONE_TAG}
+    script: echo "${DRONE_TAG}"
 #    script:
 #      - "/sites/mdb/migrations/rambler --configuration=/sites/mdb/migrations/rambler.json apply --all"
 
