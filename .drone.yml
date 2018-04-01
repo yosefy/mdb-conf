@@ -35,8 +35,8 @@ pipeline:
       - mkdir -p /drone/src/github.com/yosefy/mdb-conf/migrations
       - cp /go/src/github.com/Bnei-Baruch/mdb/mdb /drone/src/github.com/yosefy/mdb-conf/
       - cp /go/src/github.com/Bnei-Baruch/mdb/migrations/*.sql /drone/src/github.com/yosefy/mdb-conf/migrations/
-      - VERSION="$(./mdb version | awk '{print $NF}')"
-      - [ -n "$version" ] || exit 1
+      - VERSION="$(./mdb version \| awk '{print $NF}')"
+      - [ -n "$VERSION" ] || exit 1
       - echo $VERSION
       - echo -n "$VERSION" > .tags
 
