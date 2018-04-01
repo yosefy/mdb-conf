@@ -40,6 +40,7 @@ pipeline:
       - \[ -n "$VERSION" \] || exit 1
       - echo "$VERSION"
       - echo -n "$VERSION" > /drone/.tags
+      - echo -n "$VERSION" > /drone/src/github.com/yosefy/mdb-conf/.tags
 
   github_release:
     image: plugins/github-release
