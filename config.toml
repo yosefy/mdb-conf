@@ -6,13 +6,13 @@ rollbar-token=""
 rollbar-environment="development"
 
 [mdb]
-url="postgres://postgres/mdb?sslmode=disable&user=postgres&password=test123"
+url="postgres://postgres/mdb?sslmode=disable&user=postgres"
 
 [kmedia_old]
-url="postgres://postgres/mdb?sslmode=disable&user=postgres&password=test123"
+url="postgres://postgres/mdb?sslmode=disable&user=postgres"
 
 [test]
-url-template="postgres://postgres/%s?sslmode=disable&user=postgres&password=test123"
+url-template="postgres://postgres/%s?sslmode=disable&user=postgres"
 debug-sql=false
 
 [storage]
