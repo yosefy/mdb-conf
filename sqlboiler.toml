@@ -6,5 +6,5 @@ blacklist=["migrations"]
   host="postgres"
   port=5432
   user="postgres"
-  pass="test123"
+  pass=""
   sslmode="disable"
